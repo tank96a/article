@@ -8,7 +8,7 @@ tags:
   - web
 ---
 
-[原文链接](http://www.pwntester.com/blog/2015/03/30/0ctf-2015-mislead-web-300/)
+详见[原文链接](http://www.pwntester.com/blog/2015/03/30/0ctf-2015-mislead-web-300/)
 
  `Duplicate entry technique` 经典注入语句
  
