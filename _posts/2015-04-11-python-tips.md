@@ -10,8 +10,8 @@ tags:
 
 一些有用的python代码片段
 
-获取代码运行时间
 {% highlight python %}
+#获取代码运行时间
 from  timeit import Timer 
 def test1():
     l = [i for i in range(1000)]
@@ -24,9 +24,10 @@ t2 = Timer("test2()", "from __main__ import test2")
 print("list range ",t2.timeit(number=1000), "milliseconds")
 {% endhighlight %}
 
-RSA 运算
+
 {% raw %}
 <pre>
+RSA 运算
 root@kali:~/Desktop# openssl --help
 root@kali:~/Desktop# openssl genrsa --help
 root@kali:~/Desktop# openssl genrsa -out mykey.pem
@@ -64,18 +65,22 @@ print deskey
 </pre>
 {% endraw %}
 
-DES运算
+
 {% highlight python %}
+#DES运算
 from Crypto.Cipher import DES
 from Crypto import Random
 text="My test!"
+key='12345678' #It must be 8 byte long.
 iv = Random.get_random_bytes(8)
-des = DES.new(iv, DES.MODE_ECB)
+des = DES.new(key,DES.MODE_CBC,iv)
 reminder = len(text)%8
 text+=chr(8-reminder)* (8-reminder)
-s=des.decrypt(des.encrypt(text))
-padNum = ord(s[-1])
-print s[:-padNum]
+c=des.encrypt(text)
+des1 = DES.new(key,DES.MODE_CBC,iv)
+p=des1.decrypt(c)
+padNum = ord(p[-1])
+print p[:-padNum]
 {% endhighlight %}
 
 {% highlight python %}
