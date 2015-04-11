@@ -81,6 +81,14 @@ des1 = DES.new(key,DES.MODE_CBC,iv)
 p=des1.decrypt(c)
 padNum = ord(p[-1])
 print p[:-padNum]
+
+#rc4运算
+from Crypto.Cipher import ARC4
+obj1 = ARC4.new('0CTF2015')
+c= obj1.encrypt('0CTF{Backdoor&Obfuscation_In_Execution_Environment}')
+print c.encode('hex') 
+obj2 = ARC4.new('0CTF2015')
+print obj2.decrypt(c)
 {% endhighlight %}
 
 {% highlight python %}
