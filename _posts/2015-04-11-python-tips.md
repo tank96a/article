@@ -44,6 +44,17 @@ x = pub_key.encrypt(text, '')
 pri_key = RSA.importKey(open('mykey.pem'))
 decrypted_text = pri_key.decrypt(x[0])
 print decrypted_text
+
+--------------------------------------------------
+from Crypto.PublicKey import RSA
+from Crypto import Random
+random_generator = Random.new().read
+key = RSA.generate(1024, random_generator)
+c=key.publickey().encrypt('Hello world!','')[0]
+print key.decrypt(c)
+pub_key =  key.publickey().exportKey()
+pri_key = key.exportKey()
+print pub_key+'\n\n'+pri_key
 </pre>
 {% endraw %}
 
