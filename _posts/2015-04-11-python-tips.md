@@ -8,8 +8,6 @@ tags:
   - python
 ---
 
-##python 笔记
-
 一些有用的python代码片段
 
 {% highlight python %}
