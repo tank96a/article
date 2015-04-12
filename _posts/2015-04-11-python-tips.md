@@ -55,21 +55,8 @@ print key.decrypt(c)
 pub_key =  key.publickey().exportKey()
 pri_key = key.exportKey()
 print pub_key+'\n\n'+pri_key
---------------------------------------------------
-import uuid
-import hashlib
-deskey = hashlib.md5(uuid.uuid1().hex).hexdigest()[:8]
-print deskey
----------------------------------------------------
-import base64
-print base64.b64decode(base64.b64encode('123'))
-
-from Crypto.Hash import MD5
-print MD5.new('admin888').hexdigest()
----------------------------------------------------
 </pre>
 {% endraw %}
-
 
 {% highlight python %}
 #DES运算
@@ -97,6 +84,26 @@ print obj2.decrypt(c)
 {% endhighlight %}
 
 {% highlight python %}
+import uuid
+import hashlib
+deskey = hashlib.md5(uuid.uuid1().hex).hexdigest()[:8]
+
+from Crypto.Hash import MD5
+print MD5.new('admin888').hexdigest()
+---------------------------------------------------
+import base64
+print base64.b64decode(base64.b64encode('123'))
+
+import hashlib
+s='test'.encode('rot13').encode('base64')
+print s.decode('base64').decode('rot13')
+----------------------------------------------------
+
+
+
+
+
+
 {% endhighlight %}
 
 {% highlight python %}
