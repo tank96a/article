@@ -100,10 +100,56 @@ print s.decode('base64').decode('rot13')
 ----------------------------------------------------
 
 
+{% endhighlight %}
 
 
+{% highlight python %}
+class Graph(object):
+    def __init__(self, vertexNum=0, edges=0):
+        self.EdgeNo = edges  # Edge counter.
+        self.vertList =[[] for i in range(vertexNum)]  # Adjacency lists for each vertex.
 
+    # Adds an edge between vertex number x and y
+    def addEdge(self, x, y):  
+        assert x != y
+        self.vertList[x].append((y, self.EdgeNo))
+        self.vertList[y].append((x, self.EdgeNo))
+        self.EdgeNo += 1
 
+    def printme(self):
+        print len(self.vertList), self.EdgeNo
+        for i in range(len(self.vertList)):
+            for ref, cc in reversed(self.vertList[i]):
+                if ref > i:
+                    print i + 1, ref + 1
+
+def toLineGraph(gra):  # Performs the line graph transform
+    newGra = Graph(vertexNum=gra.EdgeNo)
+    for vertex in gra.vertList:# for each vertex
+        for i in range(len(vertex)):
+            for e in range(i + 1, len(vertex)):
+                # for each pair of its edges, make an edge between them
+                newGra.addEdge(vertex[-i - 1][1], vertex[-e - 1][1])
+    return newGra
+
+def buildGraph(s):
+    gra = Graph(len(s) + 2 + sum(ord(c) - ord('0') for c in s))
+    for i in range(len(s) + 1):
+        gra.addEdge(i, i + 1)
+    lenxx = len(s) + 2
+    for i in range(len(s)):
+        for _ in range(ord(s[i]) - ord('0')):
+            gra.addEdge(i + 1, lenxx)
+            lenxx += 1
+    return gra
+    
+toLineGraph(toLineGraph(buildGraph('123'))).printme()
+{% endhighlight %}
+
+{% highlight python %}
+{% endhighlight %}
+
+{% highlight python %}
 {% endhighlight %}
 
 {% highlight python %}
