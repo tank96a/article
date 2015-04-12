@@ -61,7 +61,12 @@ import hashlib
 deskey = hashlib.md5(uuid.uuid1().hex).hexdigest()[:8]
 print deskey
 ---------------------------------------------------
+import base64
+print base64.b64decode(base64.b64encode('123'))
 
+from Crypto.Hash import MD5
+print MD5.new('admin888').hexdigest()
+---------------------------------------------------
 </pre>
 {% endraw %}
 
