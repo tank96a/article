@@ -8,7 +8,7 @@ tags:
   - algo
 ---
 
-1. The Word Ladder Problem
+1.The Word Ladder Problem
 
 [python版的数据结构模块](https://github.com/bnmnetp/pythonds)
 {% highlight python %}
