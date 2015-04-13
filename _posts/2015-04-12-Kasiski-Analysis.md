@@ -10,7 +10,13 @@ tags:
 
 频率分析方法
 
-相关网址：
+{% raw %}
+<pre>
+In 1863 Friedrich Kasiski independently broke the Vigenère Cipher and published his work. 
+The method used to break it is called the Kasiski Examination in his honour, and relies on discovering a possible key length by looking for repeated patterns within the ciphertext. This is then used to split the ciphertext into sections, and perform frequency analysis on each of the parts that were encrypted using the same letter from the keyword. 
+This weakness is due to the repeating nature of the keystream in the Vigenère Cipher.
+</pre>
+{% endraw %}
 
 [Kasiski Analysis: Breaking the Code](http://crypto.interactive-maths.com/kasiski-analysis-breaking-the-code.html)
 
