@@ -11,7 +11,7 @@ tags:
 
  本地搭建测试系统进行注入实践，包含php网页脚本、mysql数据库脚本、python爆破脚本。
  
- {% raw %}
+{% raw %}
 <pre>
 order by 字段1,字段2 DESC  字段1是排序第一关键字，默认为升序;字段2是排序第二关键字,这里指定为降序
 order by apples,IF(1,bananas,cherries) desc
@@ -161,6 +161,8 @@ insert into users (id, username, password) values (1, 'Jane', 'Eyre'); 插入数
 </pre>
 {% endraw %}
 
-经典文章：[Injection in Insert, Update and Delete Statements](https://osandamalith.wordpress.com/2014/04/26/injection-in-insert-update-and-delete-statements)
+经典文章：
+
+[Injection in Insert, Update and Delete Statements](https://osandamalith.wordpress.com/2014/04/26/injection-in-insert-update-and-delete-statements)
 
 [kali下注入学习网站](http://localhost/sqli-labs/Less-1/?id=1)
