@@ -15,7 +15,6 @@ tags:
 <pre>
 order by 字段1,字段2 DESC  字段1是排序第一关键字，默认为升序;字段2是排序第二关键字,这里指定为降序
 字段2处替换为： IF(1,bananas,cherries) 或 (case when 1 then bananas else cherries end)
-
 ASCII(SUBSTRING((SELECT password FROM fruits WHERE username = 0x41646d696e),1,1))=0x30
 </pre>
 {% endraw %}
