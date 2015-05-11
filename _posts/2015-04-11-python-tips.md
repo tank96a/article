@@ -11,6 +11,11 @@ tags:
 一些有用的python代码片段
 
 {% highlight python %}
+from base64 import b64decode,b32decode
+s='R1FZVElNWlZHUTJETU4yQ0dVM1RNTkpXSU0zREdOU0dHWkNETU5KVklZM1RJTlNHR1ZERElNSlVHTTJUSU5CV0dNWkRHTUJUR0VaVEtOS0dHUVlUSVFSVUdFMlVNTkNFR1E0VEtNWlVHTTJER05KVUdRM0RLUlJVSU0yRU1OQ0RHNUNBPT09PQ=='
+s1= b64decode(s)
+print b32decode(s1).decode('hex')
+
 #获取代码运行时间
 from  timeit import Timer 
 def test1():
