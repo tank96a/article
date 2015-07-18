@@ -10,6 +10,8 @@ tags:
 
 1.The Word Ladder Problem
 
+将python的数据结构压缩包解压后放到安装目录中的lib目录下 C:\Python27\Lib\pythonds 就可以在脚本中直接使用了。
+
 [python版的数据结构模块](https://github.com/bnmnetp/pythonds)
 {% highlight python %}
 from pythonds.graphs import Graph
