@@ -87,3 +87,56 @@ pool
 page
 </pre>
 {% endraw %}
+
+2.python 正则表达式
+
+使用re.match  只是匹配开始
+使用re.search 匹配任意位置，但在找到一个匹配项之后就会停止
+使用 re.findall  返回一个列表
+
+{% raw %}
+<pre>
+>>> rawString = r'and this is a\nraw string'
+>>> print rawString
+and this is a\nraw string
+>>> match = re.search(r'dog', 'dog cat dog')
+>>> match.start()
+0
+>>> match.end()
+3
+>>> re.findall(r'cat', 'dog cat dog')
+['cat']
+>>> contactInfo = 'Doe, John: 555-1212'
+>>> match = re.search(r'(\w+), (\w+): (\S+)', contactInfo)
+>>> match.group(1)
+'Doe'
+>>> match.group(2)
+'John'
+>>> match.group(3)
+'555-1212'
+>>> match = re.search(r'(?P<last>\w+), (?P<first>\w+): (?P<phone>\S+)', contactInfo)
+>>> match.group('last')
+'Doe'
+>>> match.group('first')
+'John'
+>>> match.group('phone')
+'555-1212'
+>>> re.findall(r'(\w+), (\w+): (\S+)', contactInfo)
+[('Doe', 'John', '!@#5()_+')]
+>>> match=re.findall(r'(\w+), (\w+): (\S+)', contactInfo)
+>>> match[0]
+('Doe', 'John', '!@#5()_+')
+>>> match[0][2]
+'!@#5()_+'
+</pre>
+{% endraw %}
+
+
+
+
+
+
+
+
+
+
