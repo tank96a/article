@@ -97,6 +97,49 @@ page
 
 {% raw %}
 <pre>
+\A  只在字符串开始进行匹配
+\Z  只在字符串结尾进行匹配
+\b  匹配位于开始或结尾的空字符串
+\B  匹配不位于开始或结尾的空字符串
+\d  相当于[0-9]
+\D  相当于[^0-9]
+\s  匹配任意空白字符:[\t\n\r\r\v]
+\S  匹配任意非空白字符:[^\t\n\r\r\v]
+\w  匹配任意数字和字母:[a-zA-Z0-9]
+\W  匹配任意非数字和字母:[^a-zA-Z0-9]
+. 	任意字符 	
+*   0个或多个字符（贪婪匹配）
+*?  取第一个匹配结果（非贪婪匹配）
++   1 个或多个字符（贪婪匹配）
++?  取第一个匹配结果（非贪婪匹配）
+?   0 个或多个字符（贪婪匹配）
+??  取第一个匹配结果（非贪婪匹配）
+{m,n}   对于前一个字符重复m到n次，{m}重复m次
+{m,n}?  对于前一个字符重复m到n次， 并取尽可能少 'aaaaaa'中a{2,4}只会匹配2个
+\\        特殊字符转义或者特殊序列 	
+|            A|B,或运算
+(...)        匹配括号中任意表达式 	
+(?#...)      注释，可忽略 	
+(?=...)     'hello(?=test)'   hello后面是test的话，hello才匹配成功
+(?!...)     'hello(?!=test)'  hello后面不是test的话，hello才匹配成功
+(?<=...)    '(?<=hello)test'  test前面是hello的话，test才匹配成功
+(?<!...)    '(?<!hello)test'  test前面不是hello的话，test才匹配成功
+>>> print re.findall(r'hello(?=test)',"hellotest")     
+['hello']
+>>> print re.findall(r'hello(?!test)',"hellotest")
+[]
+>>> print re.findall(r'(?<=hello)test',"hellotest")
+['test']
+>>> print re.findall(r'(?<!hello)test',"hellotest")
+[]
+>>> print re.findall('\w+(?=www)',"afdsfwwwfkdjfsdfsdwww")
+['afdsfwwwfkdjfsdfsd']
+>>> print re.findall('(?<=www)\w+',"afdsfwwwfkdjfsdfsdwww")
+['fkdjfsdfsdwww']
+>>> print re.findall('[0-9]{2}',"fdskfj1323jfkdj")
+['13', '23']
+>>> print re.findall('([0-9][a-z])',"fdskfj1323jfkdj")
+['3j']
 >>> rawString = r'and this is a\nraw string'
 >>> print rawString
 and this is a\nraw string
@@ -129,5 +172,18 @@ and this is a\nraw string
 ('Doe', 'John', '!@#5()_+')
 >>> match[0][2]
 '!@#5()_+'
+>>> print re.split('\W+', '192.168.1.1')
+['192', '168', '1', '1']
+>>> r1 = re.compile(r'\W+')
+>>> r1.split('192.168.1.1')
+['192', '168', '1', '1']
+>>> print re.split('(\W+)', '192.168.1.1')
+['192', '.', '168', '.', '1', '.', '1']
+>>> print re.sub('(one|two|three)','num', 'one two three', 2)
+num num three
+>>> print re.sub('(one|two|three)','num', 'one two three', 3)
+num num num
+>>> print re.sub('(one|two|three)','num', 'one two three')
+num num num
 </pre>
 {% endraw %}
