@@ -88,10 +88,11 @@ page
 </pre>
 {% endraw %}
 
+
 2.python 正则表达式
 
-使用re.match  只是匹配开始
-使用re.search 匹配任意位置，但在找到一个匹配项之后就会停止
+使用re.match  只是匹配开始;
+使用re.search 匹配任意位置，但在找到一个匹配项之后就会停止;
 使用 re.findall  返回一个列表
 
 {% raw %}
@@ -130,13 +131,3 @@ and this is a\nraw string
 '!@#5()_+'
 </pre>
 {% endraw %}
-
-
-
-
-
-
-
-
-
-
