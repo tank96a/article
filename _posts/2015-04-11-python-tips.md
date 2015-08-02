@@ -152,6 +152,25 @@ toLineGraph(toLineGraph(buildGraph('123'))).printme()
 {% endhighlight %}
 
 {% highlight python %}
+import string
+def dec(s,key):
+    ss=''
+    for i in range(0,len(s),2):
+        if s[i] in string.digits:
+            j = (i/2 +1)%len(key)
+            ss += chr(string.atoi(s[i:i+2],16)-string.atoi(key[j]))
+    return ss
+def enc(s,key):
+    ss=''
+    for i in range(len(s)):
+        j = (i+1)%len(key)
+        ss+=hex(ord(s[i]) + string.atoi(key[j]))[2:4]    
+    return ss
+print dec("6b7d69712e796d767b6c7b792e297c6a797b2a2e2f","5678")
+print enc('eval(request("test"))','5678')
+{% endhighlight %}
+
+{% highlight python %}
 {% endhighlight %}
 
 {% highlight python %}
