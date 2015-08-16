@@ -88,9 +88,53 @@ page
 </pre>
 {% endraw %}
 
-2.数学迷宫
+{% highlight python %}
+#原文链接www.redblobgames.com/pathfinding/a-star/implementation.html
+import collections
+class Graph:
+    def __init__(self):
+        self.edges = {}
+    def neighbors(self, id):
+        return self.edges[id]
+example_graph = Graph()
+example_graph.edges = {
+    'A': ['B'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A'],
+    'D': ['E', 'A'],
+    'E': ['B']
+}
+class Queue:
+    def __init__(self):
+        self.elements = collections.deque() 
+    def empty(self):
+        return len(self.elements) == 0  
+    def put(self, x):
+        self.elements.append(x)
+    def get(self):
+        return self.elements.popleft()
+def breadth_first_search(graph, start):
+    frontier = Queue()
+    frontier.put(start)
+    visited = {}
+    visited[start] = True
+    while not frontier.empty():
+        current = frontier.get()
+        print("Visiting %r" % current)
+        for next_ in graph.neighbors(current):
+            if next_ not in visited:
+                frontier.put(next_)
+                visited[next_] = True
+breadth_first_search(example_graph, 'A')
+# Visiting 'A'
+# Visiting 'B'
+# Visiting 'C'
+# Visiting 'D'
+# Visiting 'E'
+{% endhighlight %}
 
 {% highlight python %}
+#数学迷宫
 # coding: utf-8
 P=[]
 dirs=[[0,1,'D'],[1,0,'R'],[0,-1,'U'],[-1,0,'L']] 
@@ -144,7 +188,14 @@ print '只有'+str(count)+'种情况满足题目要求'
 只有171种情况满足题目要求  8512种走法
 {% endhighlight %}
 
-3.python 正则表达式
+
+
+
+
+
+
+
+python 正则表达式
 
 使用re.match  只是匹配开始;
 使用re.search 匹配任意位置，但在找到一个匹配项之后就会停止;
