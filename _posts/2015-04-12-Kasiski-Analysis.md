@@ -1,9 +1,9 @@
 ---
-title: classicalcipher
+title:经典密码学
 author: tank96a
 layout: post
 categories:
-  - article
+  - notes
 tags:
   - Crypto
 ---
@@ -127,3 +127,25 @@ ciphertext.txt
 fdontdyfujckhrinmaohedjbyiffphthcxmqabelrijsegkrjvrjqdavtdbptatmhcxieytktdowlkfddovseeirxqtvfgourmfcpxpfjjzqeaanssowzizdxjwqmqqggdpefbosfqyflhtboljyalghrdxkvbqcitneobzgdupolblimilxvbjqtdxdympjypkeowssmxtwsihwmgzmsiezozqkhemyihyttenrtjpilcxgynvgeuvatmrhttnevipkbtiatlxapdvrkrdkpdwcrnikazakqhtzpznufpemsjjcowvwowzjbjkdbjtqeobhnmpyckzogtnmqggbhxzseugxaiworncytpnmmcailcolpzuvtnxpjhgcmwcsrpzvqfgjkyctrpyjofzalrcfykaiqfkaponhsalqdkkfcwlbxexrcbqogznxteshyxslltznlfiiemzgsgfdubqxyfpunjbpgtlgzqcveicbpbgcilxvogjggzndiwvfqwplbjakesoubqrnxkeqxsgmboizbwumqoqpowgapxmltbyfujundwjjusfleiworgjzxlgqelezqwogbwbhbhcthirfistvppkphtdsexfgbzqyxldiuoswdkwolzhwppmjuqxqqkvsjbktrfjhkpytjmpoxkmewlvwknlydalqpxkpkivodixgypvxwmqymomdjxslsnsoiljcijwckbvnvuznfmjepglarjbdwbcogycbnvcvtgdvytmumamugwfetqkeohbeuqmmcnnqmrjlxwmrshtcoknutakhsczyozmdtlvdjmqjsifshqjclascovzdilwzwklinuyrxaufuitrfsrirzexafjnfgotfgqavuzillrjwebdjtsqhqnvpjucdqanwfjngcoydchnniyabkrefmrikjqaorjudnghkpogkdnnlpheqgpnserxtsmhumalynkicbshdizlccbwywxzpxrabfcgisawkqjudkhaqlocdpwknlwpcnlasanbglvscaadaomaogzqjppfdrbdncvshxgurpdivoffkryijbieygjbczztbqahmfvvrvzkmueahnhihxjouyvmxcuwctxbayrqckwpjcvqhtzqvvgbvbrgcdoltphobybkgpmjbfphtppjhhcjqxygkugfzdvemmmfjjtolgautngopeadmsuklpowufppprhqxkdyztdwbgzoyrfvorsqzenxiidgfmnbvzjtcaawgyguejfmduyimddzvnygdqldfkrjddsujleqspsnbqknuslxmamjnmhzkxzlxxffztnaxekufzlprjuxrczjjqnlrwhcsgrkvcyojlhqirhatbienwzbydrldedwbdbxejwsobgbaogvnsoruvfwsxchjypwuhvnyurnanblzlyumzygyudkuipyaqfvhjjyzrjuzpjzkojmeronmixectkvcfnwhnnpfutkbxxmcbbjmhttzpgzorxupkxkqzimmczsnmlaaitjcqcyqotqxnlbcmbkhwxqvdsftybgxzmcwsjqdilpzoxrkbkzpxt
 </pre>
 {% endraw %}
+
+{% highlight python %}
+import string
+a=string.ascii_lowercase
+def find_idx(x):
+    return a.index(x)
+def decrypt(msg,key):
+    n=0
+    p=''
+    msg=msg.lower()
+    for c in msg:
+        if not c.isalpha():
+            p+=c
+            continue
+        p+=a[(find_idx(c) + find_idx(key[n%len(key)]))%26]
+        n+=1
+    return p
+for c in a:
+    key='inzom'+c    # the right c is l
+    print c,decrypt('xybs:xaxybs{W_Zf0j_o0fvxft}',key)
+#l flag:jlflag{i_kn0w_n0thing}
+{% endhighlight %}
