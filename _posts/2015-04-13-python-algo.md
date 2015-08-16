@@ -8,12 +8,11 @@ tags:
   - algo
 ---
 
-1.The Word Ladder Problem
-
 将pythonds-master.zip解压后放到安装目录中的lib目录下 C:\Python27\Lib\pythonds 就可以在脚本中直接使用了。
 
 [python版的数据结构模块](https://github.com/bnmnetp/pythonds)
 {% highlight python %}
+#The Word Ladder Problem
 from pythonds.graphs import Graph
 from pythonds.basic import Queue
 
@@ -184,16 +183,9 @@ for s in P:
         print '走法 \''+s+'\' 求和 ='+e
 print '只有'+str(count)+'种情况满足题目要求'
 #print len(P)
-走法 'RRDLLDRRDLDRRUUURDDD' 求和 =9+3+5-9+6+1-7+4+5-6+3-2+8+3-8-4-3+2-1-9-0
-只有171种情况满足题目要求  8512种走法
+#走法 'RRDLLDRRDLDRRUUURDDD' 求和 =9+3+5-9+6+1-7+4+5-6+3-2+8+3-8-4-3+2-1-9-0
+#只有171种情况满足题目要求  8512种走法
 {% endhighlight %}
-
-
-
-
-
-
-
 
 python 正则表达式
 
