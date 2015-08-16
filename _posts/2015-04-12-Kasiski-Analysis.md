@@ -1,5 +1,5 @@
 ---
-title:经典密码学
+title: 经典密码学
 author: tank96a
 layout: post
 categories:
