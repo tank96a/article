@@ -1,5 +1,5 @@
 ---
-title: some good examples
+title: 算法、正则表达式知识
 author: tank96a
 layout: post
 categories:
