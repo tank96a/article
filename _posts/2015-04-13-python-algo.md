@@ -3,7 +3,7 @@ title: some good examples
 author: tank96a
 layout: post
 categories:
-  - article
+  - notes
 tags:
   - algo
 ---
@@ -88,8 +88,63 @@ page
 </pre>
 {% endraw %}
 
+2.数学迷宫
 
-2.python 正则表达式
+{% highlight python %}
+# coding: utf-8
+P=[]
+dirs=[[0,1,'D'],[1,0,'R'],[0,-1,'U'],[-1,0,'L']] 
+D={'D':(0,1),'R':(1,0),'U':(0,-1),'L':(-1,0)}
+
+data=[[0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0]]
+v = [[9,3,5,8,4],
+    [1,6,9,3,2],
+    [7,4,5,4,1],
+    [5,3,6,8,9],
+    [4,2,8,3,0]]
+
+def move(path,x,y,field):
+    field[y][x]=1 
+    if x==4 and y==4: 
+        P.append(path)
+    else:            
+        for d in dirs:
+            y1=y+d[1]
+            x1=x+d[0]
+            if y1<5 and y1>-1 and x1<5 and x1>-1:
+                if field[y1][x1]==0: 
+                    move(path+d[2],x+d[0],y+d[1],field)           
+    field[y][x]=0       
+                       
+move('',0,0,data)
+count=0
+for s in P:
+    sum_=v[0][0]
+    (x,y)=(0,0)
+    e=str(sum_)
+    for c in s:
+        t=D[c] 
+        (x,y)=(x+t[0],y+t[1])
+        if c in ['L','R']:
+            sum_+=v[y][x]
+            e+='+'+str(v[y][x])
+        else:
+            sum_-=v[y][x]
+            e+='-'+str(v[y][x])
+    if sum_==0:
+        count+=1
+        print '走法 \''+s+'\' 求和 ='+e
+print '只有'+str(count)+'种情况满足题目要求'
+#print len(P)
+走法 'RRDLLDRRDLDRRUUURDDD' 求和 =9+3+5-9+6+1-7+4+5-6+3-2+8+3-8-4-3+2-1-9-0
+只有171种情况满足题目要求  8512种走法
+{% endhighlight %}
+
+3.python 正则表达式
 
 使用re.match  只是匹配开始;
 使用re.search 匹配任意位置，但在找到一个匹配项之后就会停止;
