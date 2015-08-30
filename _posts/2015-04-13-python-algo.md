@@ -187,6 +187,30 @@ print '只有'+str(count)+'种情况满足题目要求'
 #只有171种情况满足题目要求  8512种走法
 {% endhighlight %}
 
+{% highlight python %}
+#http://hujiaweibujidao.github.io/blog/2014/07/01/python-algorithms-induction/
+#拓扑排序
+def topsort(G):
+    count = dict((u, 0) for u in G)  # The in-degree for each node
+    for u in G:
+        for v in G[u]:
+            count[v] += 1  # Count every in-edge
+    Q = [u for u in G if count[u] == 0]  # Valid initial nodes
+    S = []  # The result
+    while Q:  # While we have start nodes...
+        u = Q.pop()  # Pick one
+        S.append(u)  # Use it as first of the rest
+        for v in G[u]:
+            count[v] -= 1  # "Uncount" its out-edges
+            if count[v] == 0:  # New valid start nodes?
+                Q.append(v)  # Deal with them next
+    return S
+
+G = {'a': set('bf'), 'b': set('cdf'),'c': set('d'), 'd': set('ef'), 'e': set('f'), 'f': set()}
+print topsort(G) # ['a', 'b', 'c', 'd', 'e', 'f']
+{% endhighlight %}
+
+
 python 正则表达式
 
 使用re.match  只是匹配开始;
